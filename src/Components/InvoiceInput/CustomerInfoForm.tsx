@@ -1,5 +1,5 @@
-import type { Section } from "./InvoiceInput/InvoiceInput";
-import type { FormData } from "../types/InvoiceTrackerTypes";
+import type { FormData } from "../../types/InvoiceTrackerTypes";
+import type { Section } from "./InvoiceInput";
 
 export default function CustomerInfoForm({
   formData,
