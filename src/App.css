@@ -1,16 +1,8 @@
-#root {
-  font-family: 'Inter', sans-serif;  
-  max-width: 100%;
-  /* width: 1500px; */
-  padding: 1rem;
-  margin: 0 auto;
-  border: 1px solid rgba(0,0,0,.8);
-  border-radius: 8px;
-}
-
 /****** VARIABLES ******/
 
 :root {
+  background-color: rgba(0,0,0,.8);
+
   /*COLORS*/
   --bg-black: #000000;
   --main-blue: #2f58af;
@@ -18,9 +10,12 @@
   --bg-blue: #1F2937;
   --bg-gray: #e7e7e7;
   --dk-avo-green: rgb(83, 168, 83);
-  --avo-green: rgb(124, 207, 124);
+  --avo-green: rgb(59, 117, 59);
   --txt-gray: #918E9B;
   --txt-white: #FFFFFF;
+
+  /*LIGHT MODE COLORS*/
+  --charcoal: #222;
 
   /*BORDER RADIUS*/
   --br-reg: 5px;
@@ -63,6 +58,16 @@ input[type=number] {
 }
 
 /*====== GLOBAL STYLES ======*/
+
+#root {
+  background-color: #222;
+  font-family: 'Inter', sans-serif;  
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,.8);
+  border-radius: 8px;
+}
 
 form {
   margin-bottom: var(--medium);
@@ -297,7 +302,7 @@ textarea::placeholder {
   justify-content: center;
   align-items: center;
   gap: var(--large);
-  margin-bottom: var(--large);
+  margin: var(--medium) var(--medium) var(--large);
 
   grid-column: 1 / -1;
 }
@@ -506,3 +511,28 @@ ul {
   list-style-type: none;
 } */
 
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: var(--txt-white);
+  }
+
+   #root {
+    color: var(--charcoal);
+    background-color: whitesmoke;
+   }
+
+   h1,
+   h2,
+   h3,
+   h4,
+   p,
+   input::placeholder,
+   textarea::placeholder {
+    color: var(--charcoal);
+   }
+
+   .task-info-container {
+    background-color: var(--txt-white);
+   }
+}
