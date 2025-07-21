@@ -5,11 +5,25 @@ import type { InvoiceData } from "../../types/InvoiceTrackerTypes";
 
 interface InvoiceDisplayProps {
   invoiceData: InvoiceData;
+  setInvoiceData: React.Dispatch<React.SetStateAction<InvoiceData>>;
 }
 
 export default function InvoiceDisplay({
-  invoiceData
+  invoiceData,
+  setInvoiceData
 }: InvoiceDisplayProps) {
+
+  const clearInvoice = () => {
+    setInvoiceData({
+      invoiceNumber: null,
+      invoiceDate: '',
+      company: { name: '', email: '', phone: '' },
+      customer: { name: '', email: '', phone: '' },
+      services: [],
+      notes: ''
+    });
+  };
+
   return (
     <div className="invoice-display-container">
       <InvoiceInfo invoiceData={invoiceData} />
@@ -17,9 +31,14 @@ export default function InvoiceDisplay({
       <Totals invoiceData={invoiceData} />
       <div className="invoice-display-btns">
         <button 
+          className="clear-btn" 
+          onClick={clearInvoice}
+        >
+          <span className="icon fa-solid fa-xmark"></span>
+          clear invoice
+        </button>
+        <button 
           className="send-btn" 
-          type="submit"
-          onClick={() => alert('Coming soon! :)')}
         >
           <span className="icon fa-solid fa-download"></span>
           download invoice

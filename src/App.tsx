@@ -48,6 +48,7 @@ function App() {
       />
       <InvoiceDisplay
         invoiceData={invoiceData}
+        setInvoiceData={setInvoiceData}
       />
     </>
   );

@@ -9,8 +9,8 @@
   --hover-blue: #21396e;
   --bg-blue: #1F2937;
   --bg-gray: #e7e7e7;
-  --dk-avo-green: rgb(83, 168, 83);
-  --avo-green: rgb(59, 117, 59);
+  --dk-avo-green: rgb(65, 131, 65);
+  --avo-green: rgb(90, 172, 90);
   --txt-gray: #918E9B;
   --txt-white: #FFFFFF;
 
@@ -317,8 +317,22 @@ textarea::placeholder {
 }
 
 .send-btn,
-.save-btn {
+.save-btn,
+.clear-btn {
   margin-top: auto;
+}
+
+.clear-btn {
+  background-color: var(--avo-green);
+  border: 3px outset var(--avo-green);
+}
+
+.clear-btn:hover {
+  background-color: var(--dk-avo-green);
+}
+
+.clear-btn:hover > * {
+  background-color: var(--dk-avo-green);
 }
 
 .company-info-container > *,

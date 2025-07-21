@@ -80,12 +80,20 @@ const InvoiceInput = ({
         formData={formData}
         onChange={handleInputChange}
       />
+
       <button 
         type="submit"
         aria-label="submit task and price" 
       >
         <span className="icon fa-solid fa-plus"></span>
         Create Invoice
+      </button>
+      <button 
+        aria-label="submit task and price" 
+        onClick={() => alert('Coming soon! :)')}
+      >
+        <span className="icon fa-solid fa-magnifying-glass"></span>
+        Find invoice
       </button>
     </form>
   );
