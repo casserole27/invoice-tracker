@@ -87,7 +87,7 @@ button {
   padding: 1.5em .75em;
 }
 
-button {
+button:not(:disabled) {
   cursor: pointer;
   font-family: 'Inter', sans-serif;  
   font-weight: 700;
@@ -106,13 +106,19 @@ button {
   align-items: center;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background: var(--hover-blue);
   border: 3px outset var(--hover-blue);
 }
 
-button:hover > * {
+button:hover:not(:disabled) > * {
   background: var(--hover-blue);
+}
+
+button:disabled {
+  font-family: 'Inter', sans-serif;  
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 table {
@@ -287,10 +293,10 @@ textarea::placeholder {
   margin-bottom: var(--small);
 
 
-  display: grid;
+  /* display: grid;
   grid-template-columns: 10rem 2fr 1fr;
   column-gap: 2rem;
-  align-items: right;
+  align-items: right; */
 }
 
 .task-info-container > * {
