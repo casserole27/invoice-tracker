@@ -27,7 +27,7 @@ export default function InvoiceDisplay({
   return (
     <div className="invoice-display-container">
       <InvoiceInfo invoiceData={invoiceData} />
-      <ServiceItemsInfo invoiceData={invoiceData} />
+      <ServiceItemsInfo invoiceData={invoiceData} setInvoiceData={setInvoiceData}/>
       <Totals invoiceData={invoiceData} />
       <div className="invoice-display-btns">
         <button 
