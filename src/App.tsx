@@ -13,7 +13,7 @@ function App() {
     company: { name: '', email: '', phone: '' },
     customer: { name: '', email: '', phone: '' },
     services: { 
-      id: Date.now(),
+      id: Date.now(), //id placeholder
       serviceDate: '',
       description: '',
       numberOfHours: null,
@@ -31,8 +31,10 @@ function App() {
     customer: { name: '', email: '', phone: '' },
     services: [],
     notes: '',
-    // total: null
+    total: null
   });
+
+  console.log('invoiceData', invoiceData)
 
   return (
     <>

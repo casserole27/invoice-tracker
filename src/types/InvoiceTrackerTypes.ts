@@ -34,6 +34,6 @@ export interface InvoiceData {
   customer: CustomerData;
   services: ServiceData[];
   notes: string;
-  // total: number | null;
+  total: number | null;
 }
 

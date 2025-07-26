@@ -1,6 +1,6 @@
 import InvoiceInfo from "./InvoiceInfo";
 import ServiceItemsInfo from "./ServiceItemsInfo";
-import Totals from "../Totals";
+import Totals from "./Totals";
 import type { InvoiceData } from "../../types/InvoiceTrackerTypes";
 
 interface InvoiceDisplayProps {
@@ -20,7 +20,8 @@ export default function InvoiceDisplay({
       company: { name: '', email: '', phone: '' },
       customer: { name: '', email: '', phone: '' },
       services: [],
-      notes: ''
+      notes: '',
+      total: null
     });
   };
 
@@ -28,7 +29,7 @@ export default function InvoiceDisplay({
     <div className="invoice-display-container">
       <InvoiceInfo invoiceData={invoiceData} />
       <ServiceItemsInfo invoiceData={invoiceData} />
-      <Totals invoiceData={invoiceData} />
+      <Totals invoiceData={invoiceData} setInvoiceData={setInvoiceData} />
       <div className="invoice-display-btns">
         <button 
           className="clear-btn" 
