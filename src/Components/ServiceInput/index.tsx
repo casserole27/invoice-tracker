@@ -17,12 +17,16 @@ export default function ServiceInput({
   // console.log('services', services);
 
   const handleServiceInputChange = (field: string, value: string): void => {
+    //! temp
+    let nextId = 1;
+
     //TODO
     // const processedValue = value === '' ? null : parseFloat(value);
     setFormData(prev => ({
       ...prev,
       services: {
         ...prev.services,
+        id: nextId++,
         [field]: value
       }
     }));
@@ -39,6 +43,7 @@ export default function ServiceInput({
 
   const addService = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     //TODO
     // const newService = await api.post(`/invoices/${invoiceData.invoiceNumber}/services`, formData.service);
 
@@ -53,7 +58,7 @@ export default function ServiceInput({
     setFormData(prev => ({
       ...prev,
       services: {
-        id: Date.now(),
+        id: 0,
         serviceDate: '',
         description: '',
         numberOfHours: null,

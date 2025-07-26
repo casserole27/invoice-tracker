@@ -13,7 +13,6 @@ export const calculateTotalServiceAmount = (service: ServiceData) => {
 };
 
 export const formattedTotal = (amount: number) => {
-  console.log(typeof amount)
   if (amount == null) return '$0.00'; 
   return `$${amount.toFixed(2)}`;
 };

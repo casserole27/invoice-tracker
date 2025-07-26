@@ -13,7 +13,7 @@ export type Section = 'company' | 'customer';
 const InvoiceInput = ({ 
   formData,
   setFormData,
-  setInvoiceData 
+  setInvoiceData,
 }: InvoiceCreatorProps) => {
  
   const handleInputChange = (
@@ -39,6 +39,8 @@ const InvoiceInput = ({
 
   const createInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let nextId = 1;
+    
     //TODO
     // const response = await api.post('/invoices', {
     //   company: formData.company,
@@ -56,7 +58,7 @@ const InvoiceInput = ({
 
     setFormData(prev => ({
       ...prev,
-      invoiceDate: '',
+      invoiceNumber: nextId++,
       company: { name: '', email: '', phone: '' },
       customer: { name: '', email: '', phone: '' },
     }));
