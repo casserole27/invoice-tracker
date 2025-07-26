@@ -1,32 +1,72 @@
+import { useState } from "react";
 import type { InvoiceData, ServiceData } from "../../types/InvoiceTrackerTypes";
 import { calculateTotalServiceAmount, formattedTotal } from "../../utils/totalServiceAmount";
 
-export default function ServiceItemsInfo({ invoiceData }: {invoiceData: InvoiceData}) {
- const { services } = invoiceData;
+interface ServiceItemsInfoProps {
+  invoiceData: InvoiceData,
+  setInvoiceData: React.Dispatch<React.SetStateAction<InvoiceData>>;
+}
 
- return (
-  <section className="task-info-container">
-    <div>
-      <h4>Date</h4>
-      {services.map((service: ServiceData) => (
-        <p key={service.id}>
-          <time dateTime={service.serviceDate}>{service.serviceDate}</time>
-        </p>
-      ))}
-    </div>
-    <div>
-      <h4>Item</h4>
-      {services.map((service: ServiceData) => (
-        <p key={service.id}>{service.description}</p>
-      ))}
-    </div>
-    <div>
-      <h4 className="total-header">Total</h4>
-      {services.map((service: ServiceData) => {
-        const total = calculateTotalServiceAmount(service);
-        return <p key={service.id} className="total-amount">{formattedTotal(total)}</p>;
-      })}     
-    </div>
-  </section>
- );
+export default function ServiceItemsInfo({ 
+  invoiceData,
+  setInvoiceData 
+}: ServiceItemsInfoProps) {
+  const { services } = invoiceData;
+  const [serviceId, setServiceId] = useState<number>(0);
+
+  const handleRemoveTask = () => {
+    const newServiceArray = services.filter((service: ServiceData) => service.id !== serviceId);
+      setInvoiceData(prev => ({
+        ...prev,
+        services: newServiceArray
+      }));
+  };
+
+return (
+  <div>
+    <section className="task-info-container">
+      <div>
+        {services.map((service: ServiceData) => {
+          const total = calculateTotalServiceAmount(service);
+          return (
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto 1fr auto', columnGap: '1rem' }}>
+              <input 
+                type="checkbox" 
+                name='task' 
+                aria-label="select task" 
+                value={service.id}
+                onChange={(e) => {
+                  if(e.target.checked) {
+                    setServiceId(service.id)
+                  } else {
+                    setServiceId(0);
+                  }
+                }}
+              />
+              <p key={service.id}>
+                <time dateTime={service.serviceDate}>{service.serviceDate}</time>
+              </p>
+              <p key={service.id}>{service.description}</p>
+              <p key={service.id} className="total-amount">{formattedTotal(total)}</p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+    <section style={{ display: 'flex', gap: '1rem' }}>
+      <button 
+        disabled={services.length === 0 || serviceId === 0}
+        onClick={handleRemoveTask}
+        >
+          remove task
+      </button>
+      <button 
+        disabled={services.length === 0 || serviceId === 0}
+        onClick={() => alert('Coming soon! :)')}
+      >
+        edit task
+      </button>
+    </section>
+  </div>
+  );
 }
