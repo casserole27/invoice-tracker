@@ -12,13 +12,8 @@ function App() {
     invoiceDate: '',
     company: { name: '', email: '', phone: '' },
     customer: { name: '', email: '', phone: '' },
-<<<<<<< Updated upstream
-    services: { 
-      id: Date.now(), //id placeholder
-=======
     services: {
       id: 0, //id placeholder
->>>>>>> Stashed changes
       serviceDate: '',
       description: '',
       numberOfHours: null,

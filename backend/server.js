@@ -1,9 +1,15 @@
     import express from 'express';
+    import invoiceRoutes from './routes/invoices.js';
     
     const app = express();
     const port = 3000;
 
     app.use(express.json()); //Middleware to parse JSON bodies
+
+    // Import routes
+    //! /api/items is the route pattern
+    //! For any URL that starts with /api/invoices, use the routes defined in the invoiceRoutes file
+    app.use('/api/invoices', invoiceRoutes);
 
     app.get('/', (req, res) => {
         res.send('Hello, World!');
