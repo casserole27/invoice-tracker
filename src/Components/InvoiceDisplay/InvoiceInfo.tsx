@@ -21,34 +21,34 @@ export default function InvoiceInfo({
       <section className="invoice-info-container">
         <header className="invoice-header">
           <div className="invoice-meta">
-            <p><strong>Invoice Date:</strong> <time dateTime={invoiceDate}>{invoiceDate}</time></p>
-            <p><strong>Invoice Number:</strong> <span>{invoiceNumber}</span></p>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Invoice Date:</strong> <time dateTime={invoiceDate}>{invoiceDate}</time></p>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Invoice Number:</strong> <span>{invoiceNumber}</span></p>
           </div>
         </header>
 
         <div className="invoice-details">
           <address className="company-info">
-            <h3>Company Information</h3>
-            <p><strong>Name:</strong> {company.name}</p>
-            <p><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></p>
+            <h3 className="text-sm font-bold uppercase text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)] md:text-lg">company information</h3>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Name:</strong> {company.name}</p>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></p>
             {company.phone && (
-              <p><strong>Phone:</strong> <a href={`tel:${company.phone}`}>{company.phone}</a></p>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Phone:</strong> <a href={`tel:${company.phone}`}>{company.phone}</a></p>
             )}
           </address>
 
           <address className="customer-info">
-            <h3>Customer Information</h3>
-            <p><strong>Name:</strong> {customer.name}</p>
-            <p><strong>Email:</strong> <a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+            <h3 className="text-sm font-bold uppercase text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)] md:text-lg">customer information</h3>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Name:</strong> {customer.name}</p>
+            <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Email:</strong> <a href={`mailto:${customer.email}`}>{customer.email}</a></p>
             {customer.phone && (
-              <p><strong>Phone:</strong> <a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]"><strong>Phone:</strong> <a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
             )}
           </address>
 
           {invoiceData.notes && (
             <div className="invoice-notes">
-              <h3>Notes</h3>
-              <p>{invoiceData.notes}</p>
+              <h3 className="text-sm font-bold uppercase text-[var(--charcoal)] dark:text-[var(--txt-white)] md:text-lg">Notes</h3>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]">{invoiceData.notes}</p>
             </div>
           )}
         </div>

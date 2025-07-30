@@ -67,7 +67,7 @@ const InvoiceInput = ({
   return (
     <form onSubmit={createInvoice}>    
       <div className="title-container">
-        <h1>Invoice Tracker</h1>
+        <h1 className="text-xl font-bold capitalize text-[var(--charcoal)] dark:text-[var(--txt-white)] md:text-3xl">invoice tracker</h1>
         <input 
           type="date"
           value={formData.invoiceDate}

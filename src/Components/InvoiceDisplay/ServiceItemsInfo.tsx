@@ -29,7 +29,7 @@ return (
         {services.map((service: ServiceData) => {
           const total = calculateTotalServiceAmount(service);
           return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto 1fr auto', columnGap: '1rem' }}>
+            <div key={service.id} style={{ display: 'grid', gridTemplateColumns: 'auto auto 1fr auto', columnGap: '1rem' }}>
               <input 
                 type="checkbox" 
                 name='task' 
@@ -43,11 +43,11 @@ return (
                   }
                 }}
               />
-              <p key={service.id}>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]">
                 <time dateTime={service.serviceDate}>{service.serviceDate}</time>
               </p>
-              <p key={service.id}>{service.description}</p>
-              <p key={service.id} className="total-amount">{formattedTotal(total)}</p>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]">{service.description}</p>
+              <p className="text-sm md:text-xl text-[var(--charcoal)] dark:text-[var(--txt-lt-gray)]">{formattedTotal(total)}</p>
             </div>
           );
         })}

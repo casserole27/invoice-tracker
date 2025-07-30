@@ -34,8 +34,6 @@ function App() {
     total: null
   });
 
-  console.log('invoiceData', invoiceData)
-
   return (
     <>
       <InvoiceInput 
