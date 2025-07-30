@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /****** VARIABLES ******/
 
 :root {
@@ -12,6 +14,7 @@
   --dk-avo-green: rgb(65, 131, 65);
   --avo-green: rgb(90, 172, 90);
   --txt-gray: #918E9B;
+  --txt-lt-gray: #bbb;
   --txt-white: #FFFFFF;
 
   /*LIGHT MODE COLORS*/
@@ -173,14 +176,23 @@ textarea {
 
 /*======  TYPOGRAPHY  ======*/
 
-h1 {
-  color: var(--txt-white);
-  font-size: var(--fs-l);
-  margin-bottom: .5625rem;
-  text-transform: capitalize;
+/*TODO, repetitive styling
+
+/* .invoice-info-heading {
+  @apply text-sm font-bold uppercase text-charcoal dark:text-txt-lt-gray md:text-lg;
 }
 
-h3,
+.invoice-info-text {
+  @apply text-sm md:text-xl text-charcoal dark:text-txt-lt-gray;
+} */
+
+/* h1 {
+  color: var(--txt-white);
+  font-size: var(--fs-l);
+  text-transform: capitalize;
+} */
+
+/* h3,
 h4 {
   font-weight: 700; 
   text-transform: uppercase;
@@ -191,7 +203,7 @@ h3,
 p {
   font-size: var(--fs-xs);
   color: var(--txt-gray);
-}
+} */
 
 input {
   font-size: var(--fs-xs);
@@ -212,6 +224,8 @@ textarea::placeholder {
 .title-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .invoice-items-container {
@@ -364,17 +378,17 @@ textarea::placeholder {
 
 /*====== MEDIA QUERY ======*/
 
-@media (min-width: 820px) {
+@media (min-width: 51.25rem) { 
 
   #root {
     margin: 0 auto;
   }
 
-  h1 {
+  /* h1 {
     font-size: var(--fs-l);
     margin-bottom: var(--medium);
     white-space: noWrap;
-  }
+  } */
 
   input,
   button {
@@ -386,10 +400,10 @@ textarea::placeholder {
     width: 100%;
   }
 
-  h3,
+  /* h3,
   p {
     font-size: var(--fs-m);
-  }
+  } */
 
 
 
@@ -399,6 +413,7 @@ textarea::placeholder {
     align-items: center;
     gap: 2rem;
     padding: 1rem 0;
+    
   }
 
   .service-title-container {
@@ -551,11 +566,11 @@ ul {
     background-color: whitesmoke;
    }
 
-   h1,
-   h2,
-   h3,
-   h4,
-   p,
+   /* h1, */
+   /* h2, */
+   /* h3, */
+   /* h4, */
+   /* p, */
    input::placeholder,
    textarea::placeholder {
     color: var(--charcoal);
