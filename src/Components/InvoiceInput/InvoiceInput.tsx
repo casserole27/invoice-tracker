@@ -64,6 +64,10 @@ const InvoiceInput = ({
     }));
   };
 
+  console.log('formData', formData);
+  const { company, customer } = formData;
+  const isDisabled = !formData.invoiceDate || !company.name || !company.email || !customer.name || !customer.email
+
   return (
     <form onSubmit={createInvoice}>    
       <div className="title-container">
@@ -72,6 +76,7 @@ const InvoiceInput = ({
           type="date"
           value={formData.invoiceDate}
           onChange={(e) => handleInputChange('invoiceDate', e.target.value)}
+          required
         />
       </div>
       <CompanyInfoForm 
@@ -86,8 +91,9 @@ const InvoiceInput = ({
       <button 
         type="submit"
         aria-label="submit task and price" 
+        disabled={isDisabled}
       >
-        <span className="icon fa-solid fa-plus"></span>
+        {!isDisabled && <span className="icon fa-solid fa-plus"></span>}
         Create Invoice
       </button>
       <button 

@@ -116,9 +116,18 @@ button:hover:not(:disabled) > * {
 }
 
 button:disabled {
+  cursor: not-allowed;
+  background-color: var(--txt-gray);
   font-family: 'Inter', sans-serif;  
   font-weight: 700;
   text-transform: uppercase;
+  border-radius: var(--br-soft);
+  border: none;
+
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 table {

@@ -68,6 +68,7 @@ export default function ServiceInput({
       notes: ''
     }));
   };
+  const isDisabled = !services.serviceDate || !services.description || ((!services.numberOfHours || !services.hourlyRate) && !services.serviceAmount);
 
   return (
     <form onSubmit={addService}>
@@ -102,8 +103,9 @@ export default function ServiceInput({
       <button
         type="submit" 
         className="save-btn"
+        disabled={isDisabled}
       >
-        <span className="icon fa-solid fa-plus"></span>
+        {!isDisabled && <span className="icon fa-solid fa-plus"></span>}
         Add service
       </button>
     </form>
