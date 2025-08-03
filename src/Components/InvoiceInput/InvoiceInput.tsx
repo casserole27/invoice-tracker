@@ -1,6 +1,7 @@
 import CompanyInfoForm from "./CompanyInfoForm";
 import CustomerInfoForm from "./CustomerInfoForm";
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
+import { createInvoice } from "../../api";
 
 interface InvoiceCreatorProps {
   formData: FormData;
@@ -29,47 +30,51 @@ const InvoiceInput = ({
           [field]: value
         }
       }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [field]: value
+      }));
+    }
+  };
+
+  const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>): Promise<void>  => {
+    //! Promise<void> indicates the function is asynchronous and returns a Promise that resolves to void
+    e.preventDefault(); //use this to prevent page refresh
+    let nextId = 1;
+   
+    try {
+      const response = await createInvoice(formData);
+     
+      //! Update state after successful API call, otherwise this creates a race condition
+      setInvoiceData(prev => ({
+        ...prev,
+        invoiceNumber: response.invoiceNumber || 0, //Use server response, set up for db
+        invoiceDate: formData.invoiceDate,
+        company: formData.company,
+        customer: formData.customer,
+      }));
+
+      setFormData(prev => ({
+        ...prev,
+        invoiceNumber: nextId++,
+        invoiceDate: '',
+        company: { name: '', email: '', phone: '' },
+        customer: { name: '', email: '', phone: '' },
+      }));
+
+    } catch (error) {
+      //TODO error handling
+      console.error('Failed to create invoice:', error);
     }
 
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
   };
 
-  const createInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let nextId = 1;
-    
-    //TODO
-    // const response = await api.post('/invoices', {
-    //   company: formData.company,
-    //   customer: formData.customer,
-    //   invoiceDate: formData.invoiceDate,
-    // });
-    
-    setInvoiceData(prev => ({
-      ...prev,
-      invoiceNumber: 0,
-      invoiceDate: formData.invoiceDate,
-      company: formData.company,
-      customer: formData.customer,
-    }));
-
-    setFormData(prev => ({
-      ...prev,
-      invoiceNumber: nextId++,
-      company: { name: '', email: '', phone: '' },
-      customer: { name: '', email: '', phone: '' },
-    }));
-  };
-
-  console.log('formData', formData);
   const { company, customer } = formData;
   const isDisabled = !formData.invoiceDate || !company.name || !company.email || !customer.name || !customer.email
 
   return (
-    <form onSubmit={createInvoice}>    
+    <form onSubmit={handleCreateInvoice}>    
       <div className="title-container">
         <h1>Invoice Tracker</h1>
         <input 
