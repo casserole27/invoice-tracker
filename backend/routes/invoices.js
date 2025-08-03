@@ -95,6 +95,7 @@ router.get('/', (request, response) => {
 //GET /invoices/id
 //* colon denotes a variable
 router.get('/:id', (request, response) => {
+  //TODO search by invoice data besides id
   //* find the invoice where the id matches
   //* parseInt converts the URL string to a number
   const invoice = invoices.find(invoice => {
