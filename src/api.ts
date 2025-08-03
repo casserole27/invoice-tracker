@@ -12,3 +12,18 @@ export const createInvoice = async (data: FormData): Promise<InvoiceResponse> =>
   })
   return response.json();
 }
+
+export const getAllInvoices = async (): Promise<InvoiceResponse[]> => {
+  //This does not send data, so the headers are not needed
+  const response = await fetch('http://localhost:3000/api/invoices', {
+    method: 'GET',
+  })
+  return response.json();
+}
+
+export const getInvoice = async (id: number): Promise<InvoiceResponse> => {
+  const response = await fetch(`http://localhost:3000/api/invoices/${id}`, {
+    method: 'GET',
+  })
+  return response.json();
+}

@@ -1,8 +1,70 @@
 import express from 'express'
 const router = express.Router();
 
-let invoices = []; // Temporary storage (will become database later)
-let nextId = 1;
+//TODO dummy data - remove
+let invoices = [
+  {
+    id: 1,
+    invoiceDate: '2025-01-15',
+    company: { name: 'Acme Corp', email: 'contact@acme.com', phone: '555-0123' },
+    customer: { name: 'John Smith', email: 'john@example.com', phone: '555-0456' },
+    services: [
+      {
+        id: 1,
+        serviceDate: '2025-01-10',
+        description: 'Website Development',
+        numberOfHours: 40,
+        hourlyRate: 75,
+        serviceAmount: 3000,
+        createdAt: new Date('2025-01-10')
+      },
+      {
+        id: 2,
+        serviceDate: '2025-01-12',
+        description: 'Bug Fixes',
+        numberOfHours: 8,
+        hourlyRate: 75,
+        serviceAmount: 600,
+        createdAt: new Date('2025-01-12')
+      }
+    ],
+    notes: 'Project completed on time',
+    total: 3600,
+    createdAt: new Date('2025-01-15')
+  },
+  {
+    id: 2,
+    invoiceDate: '2025-01-20',
+    company: { name: 'Tech Solutions', email: 'hello@techsolutions.com', phone: null },
+    customer: { name: 'Jane Doe', email: 'jane@company.com', phone: '555-0789' },
+    services: [
+      {
+        id: 3,
+        serviceDate: '2025-01-18',
+        description: 'Database Optimization',
+        numberOfHours: 16,
+        hourlyRate: 85,
+        serviceAmount: 1360,
+        createdAt: new Date('2025-01-18')
+      }
+    ],
+    notes: 'Performance improvements implemented',
+    total: 1360,
+    createdAt: new Date('2025-01-20')
+  },
+  {
+    id: 3,
+    invoiceDate: '2025-01-25',
+    company: { name: 'StartupXYZ', email: 'admin@startupxyz.io', phone: '555-0321' },
+    customer: { name: 'Mike Johnson', email: 'mike@client.org', phone: null },
+    services: [],
+    notes: 'Initial consultation - services to be added',
+    total: null,
+    createdAt: new Date('2025-01-25')
+  }
+]; // Temporary storage (will become database later)
+
+let nextId = 4;
 
 //POST /invoices
 //* request is data coming in from the app
@@ -33,6 +95,7 @@ router.get('/', (request, response) => {
 //GET /invoices/id
 //* colon denotes a variable
 router.get('/:id', (request, response) => {
+  //TODO search by invoice data besides id
   //* find the invoice where the id matches
   //* parseInt converts the URL string to a number
   const invoice = invoices.find(invoice => {

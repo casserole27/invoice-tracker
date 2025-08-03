@@ -1,7 +1,7 @@
 import CompanyInfoForm from "./CompanyInfoForm";
 import CustomerInfoForm from "./CustomerInfoForm";
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
-import { createInvoice } from "../../api";
+import { createInvoice, getAllInvoices, getInvoice } from "../../api";
 
 interface InvoiceCreatorProps {
   formData: FormData;
@@ -70,6 +70,22 @@ const InvoiceInput = ({
 
   };
 
+  const handleFindInvoices = async () => {
+    //TODO this works to get all and single invoices
+    //TODO better UX would be more robust searching
+    //TODO interface to show all invoices or single invoices
+
+    try {
+      const id = 4 as number;
+      const response = await getInvoice(id);
+      const allResponse = await getAllInvoices();
+      console.log('Found invoice', response);
+      console.log('Found all invoices', allResponse);
+    } catch (error) {
+      console.error('Error finding invoice:', error);
+    }
+  }
+
   const { company, customer } = formData;
   const isDisabled = !formData.invoiceDate || !company.name || !company.email || !customer.name || !customer.email
 
@@ -103,7 +119,10 @@ const InvoiceInput = ({
       </button>
       <button 
         aria-label="submit task and price" 
-        onClick={() => alert('Coming soon! :)')}
+        onClick={() => {
+          handleFindInvoices();
+          alert('Coming soon! :)');
+        }}
       >
         <span className="icon fa-solid fa-magnifying-glass"></span>
         Find invoice
