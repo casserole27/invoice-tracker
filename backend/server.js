@@ -1,9 +1,10 @@
     import express from 'express';
+    import cors from 'cors';
     import invoiceRoutes from './routes/invoices.js';
     
     const app = express();
     const port = 3000;
-
+    app.use(cors());
     app.use(express.json()); //Middleware to parse JSON bodies
 
     // Import routes
