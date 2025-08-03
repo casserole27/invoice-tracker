@@ -1,13 +1,13 @@
 export interface CompanyData {
   name: string;
   email: string;
-  phone?: string;
+  phone?: string | null;
 }
 
 export interface CustomerData {
   name: string;
   email: string;
-  phone?: string;
+  phone?: string | null;
 }
 
 export interface ServiceData {
@@ -35,5 +35,16 @@ export interface InvoiceData {
   services: ServiceData[];
   notes: string;
   total: number | null;
+}
+
+ export interface InvoiceResponse {
+    id: number;
+    invoiceNumber: number;
+    invoiceDate: string;
+    company: CompanyData;
+    customer: CustomerData;
+    services: ServiceData[]; 
+    notes: string;
+    createdAt: string;
 }
 

@@ -10,8 +10,8 @@ function App() {
   // Form state - updates as user types
   const [formData, setFormData] = useState<FormData>({
     invoiceDate: '',
-    company: { name: '', email: '', phone: '' },
-    customer: { name: '', email: '', phone: '' },
+    company: { name: '', email: '', phone: null },
+    customer: { name: '', email: '', phone: null },
     services: {
       id: 0, //id placeholder
       serviceDate: '',
@@ -27,14 +27,14 @@ function App() {
   const [invoiceData, setInvoiceData] = useState<InvoiceData>({
     invoiceNumber: 0,
     invoiceDate: '',
-    company: { name: '', email: '', phone: '' },
-    customer: { name: '', email: '', phone: '' },
+    company: { name: '', email: '', phone: null },
+    customer: { name: '', email: '', phone: null },
     services: [],
     notes: '',
     total: null
   });
 
-  console.log('invoiceData', invoiceData)
+  // console.log('invoiceData', invoiceData)
 
   return (
     <>
