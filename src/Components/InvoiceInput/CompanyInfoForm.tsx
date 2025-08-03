@@ -27,11 +27,13 @@ export default function CompanyInfoForm({
         required
       />
       <input 
-        type="number" 
+        type="tel" 
         name="company-phone" 
-        value={company.phone}
+        value={company.phone ?? ''}
         onChange={(e) => onChange('phone', e.target.value, 'company')}
         placeholder="Company phone (optional)" 
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        title='123-456-7890'
       />
     </div>
   );

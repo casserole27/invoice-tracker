@@ -42,6 +42,8 @@ export default function CustomerInfoForm({
         placeholder="Customer phone (optional)"
         value={customer.phone || ''}
         onChange={(e) => onChange('phone', e.target.value, 'customer')}
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        title='123-456-7890'
       />
     </div>
   );
