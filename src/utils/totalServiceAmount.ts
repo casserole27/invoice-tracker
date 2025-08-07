@@ -9,10 +9,10 @@ export const calculateTotalServiceAmount = (service: ServiceData) => {
   } else if (serviceAmount) {
     amount = Number(serviceAmount);
   } 
-  return amount;
+  return Number(amount.toFixed(2));
 };
 
-export const formattedTotal = (amount: number) => {
+export const formattedTotal = (amount: number | null) => {
   if (amount == null) return '$0.00'; 
   return `$${amount.toFixed(2)}`;
 };
