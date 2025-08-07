@@ -1,52 +1,61 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-import type { ServiceData } from "../../types/InvoiceTrackerTypes";
+import type { FormData, ServiceData } from "../../types/InvoiceTrackerTypes";
 
 interface HourlyRateFormProps {
   services: ServiceData;
   onChange: (field: string, value: string) => void;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
 
 export default function HourlyRateForm({
   services,
-  onChange
+  onChange,
+  setFormData
 }: HourlyRateFormProps) {
+
+ const handleAccordionTrigger = (field: string): void => {
+    setFormData(prev => ({
+      ...prev,
+      services: {
+        ...prev.services,
+        [field]: null
+      }
+    }));
+  }
+
+
   return (
-    <Accordion.Root
-      type='single'
-      collapsible
-    >
-      <Accordion.Item value="item-1">  
-        <Accordion.Trigger className="accordion">
-          <span>Input by hourly rate</span>
-          <ChevronDown className="accordion-icon" />
-        </Accordion.Trigger>
-        <Accordion.Content className="AccordionContent">
-          <div className="hourly-input">
-            <label htmlFor="hours-input" style={{ whiteSpace: 'noWrap'}}>Total Hours</label>
-            <input 
-              type="number"
-              name="hours-input"
-              value={services.numberOfHours ?? ''}
-              onChange={(e) => onChange('numberOfHours', e.target.value)}
-              aria-label="enter-amount"
-              placeholder="Hours"
-              step="0.01"
-            />
-            <span><strong>X</strong></span>
-            <label htmlFor="hours-input" style={{ whiteSpace: 'noWrap'}}>Hourly Rate</label>
-            <input 
-              type="number"
-              name="hourly-rate-input"
-              value={services.hourlyRate ?? ''}
-              onChange={(e) => onChange('hourlyRate', e.target.value)}
-              aria-label="enter-amount"
-              placeholder="Rate"
-              step="0.01"
-            />
-          </div>
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion.Root>
+    <Accordion.Item value="item-1">  
+      <Accordion.Trigger className="accordion" onClick={() => handleAccordionTrigger('serviceAmount')}>
+        <span>Input by hourly rate</span>
+        <ChevronDown className="accordion-icon" />
+      </Accordion.Trigger>
+      <Accordion.Content className="AccordionContent">
+        <div className="hourly-input">
+          <label htmlFor="hours-input" style={{ whiteSpace: 'noWrap'}}>Total Hours</label>
+          <input 
+            type="number"
+            name="hours-input"
+            value={services.numberOfHours ?? ''}
+            onChange={(e) => onChange('numberOfHours', e.target.value)}
+            aria-label="enter-amount"
+            placeholder="Hours"
+            step="0.01"
+          />
+          <span><strong>X</strong></span>
+          <label htmlFor="hours-input" style={{ whiteSpace: 'noWrap'}}>Hourly Rate</label>
+          <input 
+            type="number"
+            name="hourly-rate-input"
+            value={services.hourlyRate ?? ''}
+            onChange={(e) => onChange('hourlyRate', e.target.value)}
+            aria-label="enter-amount"
+            placeholder="Rate"
+            step="0.01"
+          />
+        </div>
+      </Accordion.Content>
+    </Accordion.Item>
   );
 }
