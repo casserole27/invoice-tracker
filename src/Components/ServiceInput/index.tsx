@@ -1,6 +1,7 @@
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
 import HourlyRateForm from "./HourlyRateForm";
 import ServiceAmountForm from "./ServiceAmountForm";
+import * as Accordion from "@radix-ui/react-accordion";
 
 interface InvoiceItemsProps {
   formData: FormData;
@@ -14,7 +15,6 @@ export default function ServiceInput({
   setInvoiceData
 }: InvoiceItemsProps) {
   const { services } = formData;
-  // console.log('services', services);
 
   const handleServiceInputChange = (field: string, value: string): void => {
     //! temp
@@ -91,8 +91,21 @@ export default function ServiceInput({
         placeholder="Enter task"
         required
       />
-      <HourlyRateForm services={services} onChange={handleServiceInputChange} />
-      <ServiceAmountForm services={services} onChange={handleServiceInputChange} />
+      <Accordion.Root
+        type='single'
+        collapsible
+      >
+        <HourlyRateForm 
+          services={services} 
+          onChange={handleServiceInputChange} 
+          setFormData={setFormData}
+        />
+        <ServiceAmountForm 
+          services={services} 
+          onChange={handleServiceInputChange} 
+          setFormData={setFormData}
+        />
+      </Accordion.Root>
       <textarea 
         name="invoice-notes"
         value={formData.notes}
