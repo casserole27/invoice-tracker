@@ -15,7 +15,7 @@ export default function InvoiceDisplay({
 
   const clearInvoice = () => {
     setInvoiceData({
-      invoiceNumber: null,
+      invoiceNumber: 0,
       invoiceDate: '',
       company: { name: '', email: '', phone: '' },
       customer: { name: '', email: '', phone: '' },
