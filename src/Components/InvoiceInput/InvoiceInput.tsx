@@ -41,15 +41,14 @@ const InvoiceInput = ({
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>): Promise<void>  => {
     //! Promise<void> indicates the function is asynchronous and returns a Promise that resolves to void
     e.preventDefault(); //use this to prevent page refresh
-    let nextId = 1;
-   
+    // let nextId = 1;   
     try {
       const response = await createInvoice(formData);
      
       //! Update state after successful API call, otherwise this creates a race condition
       setInvoiceData(prev => ({
         ...prev,
-        invoiceNumber: response.invoiceNumber || 0, //Use server response, set up for db
+        invoiceNumber: response.id || 0, //Use server response, set up for db
         invoiceDate: formData.invoiceDate,
         company: formData.company,
         customer: formData.customer,
@@ -57,7 +56,6 @@ const InvoiceInput = ({
 
       setFormData(prev => ({
         ...prev,
-        invoiceNumber: nextId++,
         invoiceDate: '',
         company: { name: '', email: '', phone: '' },
         customer: { name: '', email: '', phone: '' },

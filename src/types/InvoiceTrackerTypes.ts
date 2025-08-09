@@ -28,7 +28,7 @@ export interface FormData {
 }
 
 export interface InvoiceData {
-  invoiceNumber: number | null;
+  invoiceNumber: number;
   invoiceDate: string;
   company: CompanyData;
   customer: CustomerData;
