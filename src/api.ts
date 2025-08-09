@@ -1,4 +1,4 @@
-import type { FormData, InvoiceResponse } from "./types/InvoiceTrackerTypes";
+import type { FormData, ServiceData, InvoiceResponse } from "./types/InvoiceTrackerTypes";
 
 export const createInvoice = async (data: FormData): Promise<InvoiceResponse> => {
   const response = await fetch('http://localhost:3000/api/invoices', {
@@ -24,6 +24,17 @@ export const getAllInvoices = async (): Promise<InvoiceResponse[]> => {
 export const getInvoice = async (id: number): Promise<InvoiceResponse> => {
   const response = await fetch(`http://localhost:3000/api/invoices/${id}`, {
     method: 'GET',
+  })
+  return response.json();
+}
+
+export const addService = async (id: number, service: ServiceData) => {
+  const response = await fetch(`http://localhost:3000/api/invoices/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(service)
   })
   return response.json();
 }

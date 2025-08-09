@@ -1,3 +1,4 @@
+import { addService } from "../../api";
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
 import HourlyRateForm from "./HourlyRateForm";
 import ServiceAmountForm from "./ServiceAmountForm";
@@ -5,12 +6,14 @@ import * as Accordion from "@radix-ui/react-accordion";
 
 interface InvoiceItemsProps {
   formData: FormData;
+  invoiceNumber: number;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   setInvoiceData: React.Dispatch<React.SetStateAction<InvoiceData>>;
 }
 
 export default function ServiceInput({
   formData,
+  invoiceNumber,
   setFormData,
   setInvoiceData
 }: InvoiceItemsProps) {
@@ -41,37 +44,42 @@ export default function ServiceInput({
     }));
   };
 
-  const addService = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleAddService = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //TODO
-    // const newService = await api.post(`/invoices/${invoiceData.invoiceNumber}/services`, formData.service);
+    try {
+      await addService(invoiceNumber, formData.services);
 
-    // Add to local state
-    setInvoiceData(prev => ({
-      ...prev,
-      services: [...prev.services, formData.services],
-      notes: formData.notes ? formData.notes : '',
-    }));
-    
-    // Clear the form for next service
-    setFormData(prev => ({
-      ...prev,
-      services: {
-        id: 0,
-        serviceDate: '',
-        description: '',
-        numberOfHours: null,
-        hourlyRate: null,
-        serviceAmount: null
-      },
-      notes: ''
-    }));
+      // Add to local state
+      setInvoiceData(prev => ({
+        ...prev,
+        services: [...prev.services, formData.services],
+        notes: formData.notes ? formData.notes : '',
+      }));
+      
+      // Clear the form for next service
+      setFormData(prev => ({
+        ...prev,
+        services: {
+          id: 0,
+          serviceDate: '',
+          description: '',
+          numberOfHours: null,
+          hourlyRate: null,
+          serviceAmount: null
+        },
+        notes: ''
+      }));
+    } catch (error) {
+      console.error ('Failed to add services', error);
+    }
   };
+
   const isDisabled = !services.serviceDate || !services.description || ((!services.numberOfHours || !services.hourlyRate) && !services.serviceAmount);
 
   return (
-    <form onSubmit={addService}>
+    <form onSubmit={handleAddService}>
       <div className="service-title-container">
         <label htmlFor="task-date" className="service-date">Date of service</label>
         <input 
