@@ -34,8 +34,6 @@ function App() {
     total: null
   });
 
-  // console.log('invoiceData', invoiceData)
-
   return (
     <>
       <InvoiceInput 
@@ -45,6 +43,7 @@ function App() {
       />
       <ServiceInput 
         formData={formData}
+        invoiceNumber={invoiceData.invoiceNumber}
         setFormData={setFormData}
         setInvoiceData={setInvoiceData}
       />
