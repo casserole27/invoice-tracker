@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { InvoiceData } from "../../types/InvoiceTrackerTypes";
 import { calculateTotalServiceAmount, formattedTotal } from "../../utils/totalServiceAmount";
+import { updateInvoice } from "../../api";
 
 interface TotalsProps {
   invoiceData: InvoiceData;
@@ -17,14 +18,19 @@ export default function Totals({
     return sum + calculateTotalServiceAmount(service);
   }, 0);
 
-  //es-lint add setInvoiceData
   useEffect(() => {
-    setInvoiceData(prev => ({
-      ...prev,
-      total
-    }));
-  
-  }, [total, setInvoiceData]);
+    //TODO may need to optimize this
+    const handleTotalUpdate = async () => {
+      try {
+        await updateInvoice(invoiceData.invoiceNumber, { total });
+        setInvoiceData(prev => ({ ...prev, total }));
+      } catch (error) {
+        console.error('Failed to update total:', error);
+      }
+    };
+
+    handleTotalUpdate();
+  }, [total, invoiceData.invoiceNumber, setInvoiceData]);
 
   return (
     <div className="total-amt-container">          
