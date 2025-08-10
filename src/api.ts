@@ -38,3 +38,10 @@ export const addService = async (id: number, service: ServiceData) => {
   })
   return response.json();
 }
+
+export const deleteService = async (id: number, serviceId: number) => {
+  const response = await fetch(`http://localhost:3000/api/invoices/${id}/services/${serviceId}`, {
+    method: 'DELETE',
+  })
+  return response.json();
+}
