@@ -144,7 +144,7 @@ router.put('/:id', (request, response) => {
     
     invoices[index].services.push(newService);
     invoices[index] = { ...invoices[index], notes, total }
-    response.json(invoices[index])
+    response.json(newService)
   } else {
     response.status(404).json({ error: 'Invoice not found'});
   }
@@ -165,7 +165,7 @@ router.delete('/:id/services/:serviceId', (request, response) => {
     //*Create a new array except for the service we want to delete
     const invoice = invoices[invoiceIndex];
     invoice.services = invoice.services.filter(service => service.id !== serviceId);
-    response.json(invoice);
+    response.json(invoice.services);
   } else {
     response.status(404).json({ error: 'Invoice not found'})
   }
