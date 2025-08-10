@@ -27,6 +27,11 @@ export interface FormData {
   notes?: string
 }
 
+export interface InvoiceUpdate {
+  notes?: string
+  total?: number
+}
+
 export interface InvoiceData {
   invoiceNumber: number;
   invoiceDate: string;
