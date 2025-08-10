@@ -122,8 +122,6 @@ router.put('/:id', (request, response) => {
     numberOfHours,
     hourlyRate,
     serviceAmount,
-    notes, 
-    total 
   } = body;
 
   //* Returns position/index of the match
@@ -143,10 +141,27 @@ router.put('/:id', (request, response) => {
     }
     
     invoices[index].services.push(newService);
-    invoices[index] = { ...invoices[index], notes, total }
+    invoices[index] = { ...invoices[index]}
     response.json(newService)
   } else {
     response.status(404).json({ error: 'Invoice not found'});
+  }
+})
+
+//PATCH /invoices/:id
+router.patch('/:id', (request, response) => {
+  const invoiceIndex = invoices.findIndex(invoice => {
+    return invoice.id === parseInt(request.params.id);
+  })
+
+  if (invoiceIndex !== -1) {
+    invoices[invoiceIndex] = {
+      ...invoices[invoiceIndex],
+      ...request.body
+    }
+    response.json(invoices[invoiceIndex])
+  } else {
+    response.status(404).json({ error: 'Invoice not found'})
   }
 })
 
