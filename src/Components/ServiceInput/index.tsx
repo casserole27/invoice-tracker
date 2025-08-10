@@ -49,13 +49,16 @@ export default function ServiceInput({
     e.preventDefault();
 
     try {
-      await addService(invoiceNumber, formData.services);
-
+      const response = await addService(invoiceNumber, formData.services);
       // Add to local state
       setInvoiceData(prev => ({
         ...prev,
-        services: [...prev.services, formData.services],
-        notes: formData.notes ? formData.notes : '',
+        services: [
+          ...prev.services, 
+          response
+        ],
+        //TODO PATCH endpoint
+        // notes 
       }));
       
       // Clear the form for next service
