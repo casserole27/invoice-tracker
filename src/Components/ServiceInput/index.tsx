@@ -1,4 +1,4 @@
-import { addService } from "../../api";
+import { addService, updateInvoice } from "../../api";
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
 import HourlyRateForm from "./HourlyRateForm";
 import ServiceAmountForm from "./ServiceAmountForm";
@@ -7,6 +7,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 interface InvoiceItemsProps {
   formData: FormData;
   invoiceNumber: number;
+  invoiceData: InvoiceData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   setInvoiceData: React.Dispatch<React.SetStateAction<InvoiceData>>;
 }
@@ -14,6 +15,7 @@ interface InvoiceItemsProps {
 export default function ServiceInput({
   formData,
   invoiceNumber,
+  invoiceData,
   setFormData,
   setInvoiceData
 }: InvoiceItemsProps) {
@@ -50,6 +52,11 @@ export default function ServiceInput({
 
     try {
       const response = await addService(invoiceNumber, formData.services);
+      let updatedNotes = undefined;
+      if (formData.notes && formData.notes.trim() !== '' && formData.notes !== invoiceData.notes) {
+        const notesResponse = await updateInvoice(invoiceNumber, { notes: formData.notes });
+        updatedNotes = notesResponse.notes;
+      }
       // Add to local state
       setInvoiceData(prev => ({
         ...prev,
@@ -57,8 +64,7 @@ export default function ServiceInput({
           ...prev.services, 
           response
         ],
-        //TODO PATCH endpoint
-        // notes 
+        ...(updatedNotes && { notes: updatedNotes })
       }));
       
       // Clear the form for next service
@@ -72,7 +78,6 @@ export default function ServiceInput({
           hourlyRate: null,
           serviceAmount: null
         },
-        notes: ''
       }));
     } catch (error) {
       console.error ('Failed to add services', error);
