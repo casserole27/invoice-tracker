@@ -43,6 +43,7 @@ function App() {
       />
       <ServiceInput 
         formData={formData}
+        invoiceData={invoiceData}
         invoiceNumber={invoiceData.invoiceNumber}
         setFormData={setFormData}
         setInvoiceData={setInvoiceData}
