@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invoice {
+  id            Int       @id @default(autoincrement())
+  invoiceNumber Int       @unique @default(autoincrement())
+  invoiceDate   DateTime
+  notes         String?
+  total         Decimal?  @db.Decimal(10, 2)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  companyId     Int
+  customerId    Int
+  userId        Int?
+  company       Company   @relation(fields: [companyId], references: [id])
+  customer      Customer  @relation(fields: [customerId], references: [id])
+  user          User?     @relation(fields: [userId], references: [id])
+  services      Service[]
+
+  @@map("invoices")
+}
+
+model Company {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  phone     String?
+  address   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  invoices  Invoice[]
+  users     User[]
+
+  @@map("companies")
+}
+
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  phone     String?
+  address   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  invoices  Invoice[]
+
+  @@map("customers")
+}
+
+model Service {
+  id            Int      @id @default(autoincrement())
+  date          DateTime
+  description   String
+  numberOfHours Decimal? @db.Decimal(5, 2)
+  hourlyRate    Decimal? @db.Decimal(8, 2)
+  serviceAmount Decimal? @db.Decimal(10, 2)
+  invoiceId     Int
+  invoice       Invoice  @relation(fields: [invoiceId], references: [id])
+
+  @@map("services")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String
+  password  String
+  role      String    @default("user")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  companyId Int
+  invoices  Invoice[]
+  company   Company   @relation(fields: [companyId], references: [id])
+
+  @@map("users")
+}
