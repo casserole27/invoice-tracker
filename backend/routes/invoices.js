@@ -1,5 +1,8 @@
 import express from 'express'
 const router = express.Router();
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 //TODO dummy data - remove
 let invoices = [
@@ -69,22 +72,38 @@ let nextId = 4;
 //POST /invoices
 //* request is data coming in from the app
 //* response is sending data back out
-router.post('/', (request, response) => {
+router.post('/', async (request, response) => {
   //* create a new invoice object
   //* request.body contains all the form data
+  const { invoiceDate, company, customer } = request.body;
+
+  const createdCompany = await prisma.company.create({
+    data : {
+      name: company.name,
+      email: company.email,
+      phone: company.phone
+    }
+  });
+
+  const createdCustomer = await prisma.customer.create({
+    data : {
+      name: customer.name,
+      email: customer.email,
+      phone: customer.phone
+    }
+  });
+
   const newInvoice = {
-    id: nextId++,
-    ...request.body,
-    services: [],
+    invoiceDate,
+    companyId: createdCompany.id,
+    customerId: createdCustomer.id,
     createdAt: new Date()
   };
-  //* Add new invoices to the array
-  //! This will become a db query
-  invoices.push(newInvoice);
+  
+  const createdInvoice = await prisma.invoice.create({ data: newInvoice });
   //* 201 HTTP status code - "successfully created something"
   //* sends the new invoice data back as JSON
-  response.status(201).json(newInvoice);
-
+  response.status(201).json(createdInvoice);
 });
 
 // GET /invoices

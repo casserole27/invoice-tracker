@@ -2,6 +2,7 @@ import CompanyInfoForm from "./CompanyInfoForm";
 import CustomerInfoForm from "./CustomerInfoForm";
 import type { FormData, InvoiceData } from "../../types/InvoiceTrackerTypes";
 import { createInvoice, getAllInvoices, getInvoice } from "../../api";
+import { format } from 'date-fns';
 
 interface InvoiceCreatorProps {
   formData: FormData;
@@ -22,7 +23,12 @@ const InvoiceInput = ({
     value: string, 
     section?: Section
   ): void => {
-    if (section) {
+    if (field === 'invoiceDate') {
+      setFormData(prev => ({
+        ...prev,
+        [field]: new Date(value).toISOString()
+      }));
+    } else if (section) {
        setFormData(prev => ({
         ...prev,
         [section]: {
@@ -93,7 +99,7 @@ const InvoiceInput = ({
         <h1>Invoice Tracker</h1>
         <input 
           type="date"
-          value={formData.invoiceDate}
+          value={formData.invoiceDate ? format(new Date(formData.invoiceDate), 'yyyy-MM-dd') : ''}
           onChange={(e) => handleInputChange('invoiceDate', e.target.value)}
           required
         />
