@@ -12,6 +12,22 @@ dist
 dist-ssr
 *.local
 
+# Prisma generated files
+backend/prisma/client.js
+backend/prisma/client.d.ts
+backend/prisma/default.js
+backend/prisma/default.d.ts
+backend/prisma/edge.js
+backend/prisma/edge.d.ts
+backend/prisma/index.js
+backend/prisma/index.d.ts
+backend/prisma/index-browser.js
+backend/prisma/wasm.js
+backend/prisma/wasm.d.ts
+backend/prisma/package.json
+backend/prisma/runtime/
+backend/prisma/*.dll.node
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
