@@ -67,3 +67,73 @@ export default tseslint.config([
   },
 ])
 ```
+
+ ## Table of contents
+
+- [Overview](#overview)
+  - [Description](#description)
+  - [Figma design](#figma-design)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [Process](#process)
+  - [Libraries/Dependencies](#libraries-dependencies)
+  - [Continued development / tech debt](#continued-development)
+- [Useful resources](#useful-resources)
+  - [Relevant documentation](#relevant-documentation)(#continued-development)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+
+### Overview
+
+### Description
+
+### Screenshots
+
+### Figma design
+
+### Links
+
+Project locations:
+- [Github](https://github.com/casserole27/invoice-tracker)
+- [Live Site](https://invoice-tracker-drab.vercel.app/)
+
+## My process
+
+- Create Github repository
+- UI/UX
+- Project management / requirements
+- setup React / TypeScript using Vite 
+- Project work using Github issues as "tickets"
+- Publish live URL
+- Check markup and accessibility
+  -(https://wave.webaim.org/)
+- README file
+
+### Libraries / Dependencies
+- Github using command line
+- semantic HTML5
+- CSS custom properties
+- Responsive Web Design
+- React.js
+- TypeScript
+- RESTful API / CRUD endpoints
+- PostgreSQL database with Prisma ORM
+- accessibility
+
+### Continued development / tech debt
+- learning and takeaways
+- continued Unit testing
+
+## Useful resources
+
+- Claude Code CLI for explanations and solidifying learning
+
+### Relevant documentation
+
+## Author
+
+- Website - [C Lewis](https://casserole27.github.io)
+- LinkedIn - [LinkedIn](https://www.linkedin.com/in/clewisdev/)
+
+## Acknowledgments
